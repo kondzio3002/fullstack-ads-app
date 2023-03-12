@@ -19,6 +19,7 @@ exports.register = async (req, res) => {
 
       const user = await User.create({ login, password: await bcrypt.hash(password, 10), avatar, phone });
       res.status(200).send({ message: 'User created ' + user.login });
+
     } else {
       res.status(400).send({ message: 'Bad request' });
     }
@@ -38,11 +39,14 @@ exports.login = async (req, res) => {
       if (!user) {
         res.status(400).send({ message: 'Login or password is incorrect'});
       } else {
+
         if (bcrypt.compareSync(password, user.password)) {
+          req.session.login = user.login;
           res.status(200).send({ message: 'Login successful' });
         } else {
           res.status(400).send({ message: 'Login or password is incorrect'});
         }
+
       }
 
     } else {
@@ -51,5 +55,13 @@ exports.login = async (req, res) => {
 
   } catch (err) {
     res.status(500).send({ message: err.message });
+  }
+};
+
+exports.getUser = async (req, res) => {
+  if (req.session.login) {
+    res.status(200).send({ login: req.session.login });
+  } else {
+    res.status(401).send({ message: 'You are not authorized' });
   }
 };
