@@ -59,9 +59,18 @@ exports.login = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-  if (req.session.login) {
-    res.status(200).send({ login: req.session.login });
-  } else {
-    res.status(401).send({ message: 'You are not authorized' });
+  try {
+    res.send({ message: 'Yeah! I\'m logged' });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+exports.logout = async (req, res) => {
+  try {
+    req.session.destroy();
+    res.send({ message: 'I\'m logout' });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
   }
 };
