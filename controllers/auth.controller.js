@@ -7,7 +7,7 @@ exports.register = async (req, res) => {
   try {
   const { login, password, phone } = req.body;
   const avatar = req.file;
-  const fileType = avatar ? await getImageFileType(avatar) : 'unknow';
+  const fileType = avatar ? await getImageFileType(avatar) : 'unknown';
 
     if (
       login && typeof login === 'string' &&
@@ -48,6 +48,7 @@ exports.login = async (req, res) => {
 
         if (bcrypt.compareSync(password, user.password)) {
           req.session.login = user.login;
+          req.session.user = user.id;
           res.status(200).send({ message: 'Login successful' });
         } else {
           res.status(400).send({ message: 'Login or password is incorrect'});
