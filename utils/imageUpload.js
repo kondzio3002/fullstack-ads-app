@@ -8,8 +8,9 @@ const storage = multer.diskStorage({
     const [name, ext] = file.originalname.split('.');
     cb(null, `${name}-${Date.now()}.${ext}`);
   }
+
 });
 
-const imageUpload = multer({ storage });
+const imageUpload = multer({ storage, limits: { fileSize: 1048576 } });
 
 module.exports = imageUpload;
