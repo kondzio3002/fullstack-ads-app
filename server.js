@@ -30,6 +30,7 @@ app.use(express.json());
 app.use(cors());
 app.use(session({ secret: 'bzg271', store: MongoStore.create(db), resave: false, saveUninitialized: false }));
 
+app.use('/api', require('./routes/ads.routes'));
 app.use('/api/auth', require('./routes/auth.routes'));
 
 app.use((req, res) => {
