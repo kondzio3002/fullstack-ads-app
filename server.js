@@ -3,6 +3,7 @@ const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
+const path = require('path');
 
 
 const app = express();
@@ -25,10 +26,23 @@ db.once('open', () => {
 });
 db.on('error', err => console.log('Error ' + err));
 
+app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
-app.use(session({ secret: 'bzg271', store: MongoStore.create(db), resave: false, saveUninitialized: false }));
+if (process.env.NODE_ENV !== 'production') {
+  app.use(cors({
+    origin: ['http://localhost:3000'],
+    credentials: true
+  }));
+}
+app.use(session({
+  secret: `${process.env.SESSION_SECRET}`,
+  store: MongoStore.create(db),
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: process.env.NODE_ENV == 'production' }
+}));
 
 app.use('/api', require('./routes/ads.routes'));
 app.use('/api/auth', require('./routes/auth.routes'));
