@@ -1,8 +1,10 @@
 const Footer = () => {
   return (
-    <div>
-      Footer
-    </div>
+    <footer id='sticky-footer' className='py-3 mt-5 bg-secondary text-light'>
+      <div className='text-center'>
+        <small>Copyright &copy; Konrad Brożyna 2023</small>
+      </div>
+    </footer>
   );
 };
 
