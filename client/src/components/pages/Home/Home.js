@@ -1,8 +1,11 @@
+import { Container } from "reactstrap";
+import Ads from "../../features/Ads/Ads";
+
 const Home = () => {
   return (
     <div>
-      Home
-    </div>
+      <Ads />
+      </div>
   );
 };
 
