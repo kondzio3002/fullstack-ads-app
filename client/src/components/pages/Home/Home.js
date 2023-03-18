@@ -1,12 +1,9 @@
-import { Container } from "reactstrap";
 import Ads from "../../features/Ads/Ads";
 
-const Home = () => {
-  return (
+const Home = () => (
     <div>
       <Ads />
-      </div>
-  );
-};
+    </div>
+);
 
 export default Home;
