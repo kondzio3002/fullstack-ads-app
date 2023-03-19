@@ -1,20 +1,18 @@
 import styles from './Ads.module.scss';
 import Ad from '../../common/Ad/Ad';
 import { Row } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAds, loadAdsRequest } from '../../../redux/adsRedux';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { getAds, getRequest } from '../../../redux/adsRedux';
+
+import Loader from '../../common/Loader/Loader';
 
 const Ads = () => {
   const ads = useSelector(getAds);
-  
-  const dispatch = useDispatch();
+  const request = useSelector(getRequest);
 
-  useEffect(() => {
-    dispatch(loadAdsRequest())
-  }, [dispatch]);
-
-  return (
+  if (request.pending) return <Loader />
+  else if (request.error) return <h1>Error...</h1>
+  else if (request.success) return (
     <div>
       <Row className='justify-content-center'>
         {ads.map(ad => <Ad key={ad._id} {...ad} />)}
