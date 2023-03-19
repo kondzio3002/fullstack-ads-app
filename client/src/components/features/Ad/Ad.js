@@ -1,4 +1,4 @@
-import styles from "./AdBox.module.scss";
+import styles from "./Ad.module.scss";
 import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import { IMG_URL } from "../../../config";
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 
 
-const AdBox = () => {
+const Ad = () => {
   const { id } = useParams();
   const ad = useSelector(state => getAdById(state, id));
 
@@ -41,4 +41,4 @@ const AdBox = () => {
   );
 };
 
-export default AdBox;
+export default Ad;

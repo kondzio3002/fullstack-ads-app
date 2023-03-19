@@ -1,4 +1,4 @@
-import Ad from '../../common/Ad/Ad';
+import AdBox from '../../common/AdBox/AdBox';
 import { Row, Col, Button } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { getAds, getRequest } from '../../../redux/adsRedux';
@@ -20,7 +20,7 @@ const Ads = () => {
         </Col>
       </Row>
       <Row className='justify-content-center'>
-        {ads.map(ad => <Ad key={ad._id} {...ad} />)}
+        {ads.map(ad => <AdBox key={ad._id} {...ad} />)}
       </Row>
     </div>
   );
