@@ -1,4 +1,3 @@
-import styles from './Ads.module.scss';
 import Ad from '../../common/Ad/Ad';
 import { Row, Col, Button } from 'reactstrap';
 import { useSelector } from 'react-redux';

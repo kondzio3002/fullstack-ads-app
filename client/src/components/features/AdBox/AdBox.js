@@ -18,7 +18,7 @@ const AdBox = () => {
       <Row>
         <h2 className='mt-4'>{ad.title}</h2>
         <Col>
-          <img src={IMG_URL + ad.photo} className={styles.adPhoto} />
+          <img src={IMG_URL + ad.photo} className={styles.adPhoto} alt='product' />
         </Col>
         <Col>
           <Row>
@@ -29,7 +29,7 @@ const AdBox = () => {
             </Col>
             <Col>
               <p>Seller:</p>
-              <img src={IMG_URL + ad.user.avatar} className={styles.userAvatar}/>
+              <img src={IMG_URL + ad.user.avatar} className={styles.userAvatar} alt='avatar' />
               <p className='mt-2'>{ad.user.login}</p>
               <p><FontAwesomeIcon icon={faPhone}></FontAwesomeIcon> {ad.user.phone}</p>
             </Col>

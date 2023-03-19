@@ -6,7 +6,6 @@ import Button from "react-bootstrap/Button";
 const AdForm = ({ action, actionText, ...props }) => {
   const [title, setTitle] = useState(props.title || '');
   const [content, setContent] = useState(props.content || '');
-  const [date, setDate] = useState(props.date || '');
   const [photo, setPhoto] = useState(props.photo || '');
   const [price, setPrice] = useState(props.price || '');
   const [location, setLocation] = useState(props.location || '');
@@ -17,7 +16,7 @@ const AdForm = ({ action, actionText, ...props }) => {
 
   const handleSubmit = () => {
 
-      action({ title, content, date, photo, price, location, date: updateDate});
+      action({ title, content, photo, price, location, date: updateDate});
   
   };
 
