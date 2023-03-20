@@ -6,6 +6,7 @@ import { Alert } from "react-bootstrap";
 import Loader from "../../common/Loader/Loader";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../../redux/dataRedux";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -43,17 +44,11 @@ const Login = () => {
       });
   };
 
+  if (status === 'success') return <Navigate to='/' />
   return (
     <Form className='col-12 col-sm-3 mx-auto' onSubmit={handleSubmit}>
 
       <h1 className='my-4'>Sign in</h1>
-
-      { status === 'success' && (
-        <Alert variant='success'>
-          <Alert.Heading>Success!</Alert.Heading>
-          <p>You have been successfully logged in!</p>
-        </Alert>
-      )}
 
       { status === 'serverError' && (
         <Alert variant='danger'>

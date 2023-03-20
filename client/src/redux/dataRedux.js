@@ -16,6 +16,7 @@ const LOAD_ADS = createActionName('LOAD_ADS');
 const ADD_AD = createActionName('ADD_AD');
 
 const LOG_IN = createActionName('LOG_IN');
+const LOG_OUT = createActionName('LOG_OUT');
 
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
@@ -25,6 +26,7 @@ export const loadAds = payload => ({ payload, type: LOAD_ADS });
 export const addAd = payload => ({ payload, type: ADD_AD });
 
 export const logIn = payload => ({ payload, type: LOG_IN });
+export const logOut = () => ({ type: LOG_OUT });
 
 export const loadAdsRequest = () => {
   return async dispatch => {
@@ -63,6 +65,8 @@ const dataReducer = (statePart = initialState, action = {}) => {
       return { ...statePart, request: { pending: false, error: action.error, success: false } };
     case LOG_IN:
       return { ...statePart, user: { ...action.payload }};
+    case LOG_OUT:
+      return { ...statePart, user: null };
     default:
       return statePart;
   }
