@@ -13,13 +13,13 @@ const Ads = () => {
   if (request.pending) return <Loader />
   else if (request.error) return <h1>Error...</h1>
   else if (request.success) return (
-    <div>
+    <div className='mt-4'>
       <Row>
         <Col className={'order-2 offset-10'}>
-          <Link to='/ads/add'><Button color='info' outline>Add Ad</Button></Link>
+          <Link to='/ads/add'><Button color='secondary'>Add Ad</Button></Link>
         </Col>
       </Row>
-      <Row className='justify-content-center'>
+      <Row className='justify-content-center mt-3'>
         {ads.map(ad => <AdBox key={ad._id} {...ad} />)}
       </Row>
     </div>
