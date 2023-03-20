@@ -2,12 +2,11 @@ import axios from 'axios';
 import { API_URL } from '../config';
 import shortid from 'shortid';
 
-export const getAds = ({ ads }) => ads.data;
-export const getRequest = ({ ads }) => ads.request;
-export const getAdById = ({ads}, id) => ads.data.find(ad => ad._id === id);
+export const getAds = ({ data }) => data.ads;
+export const getRequest = ({ data }) => data.request;
+export const getAdById = ({data}, id) => data.ads.find(ad => ad._id === id);
 
-const reducerName = 'ads';
-const createActionName = name => `app/${reducerName}/${name}`;
+const createActionName = name => `app/data/${name}`;
 
 const START_REQUEST = createActionName('START_REQUEST');
 const END_REQUEST = createActionName('END_REQUEST');
@@ -37,7 +36,7 @@ export const loadAdsRequest = () => {
 };
 
 const initialState = {
-  data: [],
+  ads: [],
   request: {
     pending: false,
     error: null,
@@ -45,12 +44,12 @@ const initialState = {
   },
 };
 
-const adsReducer = (statePart = initialState, action = {}) => {
+const dataReducer = (statePart = initialState, action = {}) => {
   switch (action.type) {
     case LOAD_ADS:
-      return { ...statePart, data: [ ...action.payload ] };
+      return { ...statePart, ads: [ ...action.payload ] };
     case ADD_AD:
-      return { ...statePart, data: { ...action.payload, _id: shortid() }};
+      return { ...statePart, ads: { ...action.payload, _id: shortid() }};
     case START_REQUEST:
       return { ...statePart, request: { pending: true, error: null, success: false } };
     case END_REQUEST:
@@ -62,4 +61,4 @@ const adsReducer = (statePart = initialState, action = {}) => {
   }
 };
 
-export default adsReducer;
+export default dataReducer;

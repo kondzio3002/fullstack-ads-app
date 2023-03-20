@@ -2,7 +2,7 @@ import styles from "./Ad.module.scss";
 import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import { IMG_URL } from "../../../config";
-import { getAdById } from "../../../redux/adsRedux";
+import { getAdById } from "../../../redux/dataRedux";
 import { Col, Row } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';

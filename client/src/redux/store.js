@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import adsReducer from './adsRedux';
+import dataReducer from './dataRedux';
 
 const subreducers = {
-  ads: adsReducer,
+  data: dataReducer,
 };
 
 const reducer = combineReducers(subreducers);

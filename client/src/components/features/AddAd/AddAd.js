@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../../config";
-import { addAd, loadAds } from "../../../redux/adsRedux";
+import { addAd, loadAds } from "../../../redux/dataRedux";
 import AdForm from "../../common/AdForm/AdForm";
 
 const AddAd = () => {

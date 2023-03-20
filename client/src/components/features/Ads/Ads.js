@@ -1,7 +1,7 @@
 import AdBox from '../../common/AdBox/AdBox';
 import { Row, Col, Button } from 'reactstrap';
 import { useSelector } from 'react-redux';
-import { getAds, getRequest } from '../../../redux/adsRedux';
+import { getAds, getRequest } from '../../../redux/dataRedux';
 
 import Loader from '../../common/Loader/Loader';
 import { Link } from 'react-router-dom';
