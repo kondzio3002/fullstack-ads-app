@@ -4,8 +4,12 @@ import Form from "react-bootstrap/Form";
 import { API_URL } from "../../../config";
 import { Alert } from "react-bootstrap";
 import Loader from "../../common/Loader/Loader";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../../redux/dataRedux";
 
 const Login = () => {
+
+  const dispatch = useDispatch();
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +31,7 @@ const Login = () => {
       .then(res => {
         if (res.status === 200) {
           setStatus('success');
+          dispatch(logIn({ login }));
         } else if (res.status === 400) {
           setStatus('clientError');
         } else {

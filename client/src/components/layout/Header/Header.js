@@ -1,20 +1,19 @@
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Button } from 'reactstrap';
+import { Nav, Navbar } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 const Header = () => {
   return (
-    <div>
-      <Navbar color='secondary' dark className='py-2 pr-5 rounded'>
-        <NavbarBrand href='/'>Ads App</NavbarBrand>
+    <Navbar bg='secondary' variant='dark' className='py-2 p-5 rounded'>
+      <Navbar.Brand href='/'>Ads App</Navbar.Brand>
+      <Navbar.Collapse className='justify-content-end'>
         <Nav>
-          <NavItem>
-            <NavLink href='/'><Button color='secondary'>Home</Button></NavLink>
-            
-          </NavItem>
-          <NavItem><NavLink href='/register'><Button color='warning'>Sign up</Button></NavLink></NavItem>
-          <NavItem><NavLink href='/login'><Button color='success'>Sign in</Button></NavLink></NavItem>
+          <Nav.Link as={NavLink} to='/'><Button color='secondary'>Home</Button></Nav.Link>
+          <Nav.Link as={NavLink} to='/register'><Button color='warning'>Sign up</Button></Nav.Link>
+          <Nav.Link as={NavLink} to='/login'><Button color='success'>Sign in</Button></Nav.Link>
         </Nav>
-      </Navbar>
-    </div>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
