@@ -11,7 +11,11 @@ const Ads = () => {
   const request = useSelector(getRequest);
 
   if (request.pending) return <Loader />
-  else if (request.error) return <h1>Error...</h1>
+  else if (request.error) return (
+    <div className='mt-5' align='center'>
+      <h1>Error...</h1>
+    </div>
+  );
   else if (request.success) return (
     <div className='mt-4'>
       <Row>

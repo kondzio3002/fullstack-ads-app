@@ -3,8 +3,11 @@ import { API_URL } from '../config';
 import shortid from 'shortid';
 
 export const getAds = ({ data }) => data.ads;
-export const getRequest = ({ data }) => data.request;
 export const getAdById = ({data}, id) => data.ads.find(ad => ad._id === id);
+
+export const getRequest = ({ data }) => data.request;
+
+export const getUser = ({ data }) => data.user;
 
 const createActionName = name => `app/data/${name}`;
 
