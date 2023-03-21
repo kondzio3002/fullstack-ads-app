@@ -2,22 +2,26 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 const AdForm = ({ action, actionText, ...props }) => {
+  const id = props.id;
   const [title, setTitle] = useState(props.title || '');
   const [content, setContent] = useState(props.content || '');
-  const [photo, setPhoto] = useState(props.photo || '');
+  const [photo, setPhoto] = useState(props.photo || null);
   const [price, setPrice] = useState(props.price || '');
   const [location, setLocation] = useState(props.location || '');
 
-  const updateDate = new Date();
+  const dateNow = new Date(Date.now());
+  const date = dateNow.toLocaleDateString();
+
+  const navigate = useNavigate();
 
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
 
   const handleSubmit = () => {
-
-      action({ title, content, photo, price, location, date: updateDate});
-  
+    action({ title, content, photo, price, location, date, id });
+    navigate('/');
   };
 
   return (
@@ -31,7 +35,7 @@ const AdForm = ({ action, actionText, ...props }) => {
           value={title}
           onChange={e => setTitle(e.target.value)}
         />
-        {errors.title && 
+        {errors.title &&
           <small className='d-block form-text text-danger mt-2'>
             This field is required and should contain between 10 and 50 characters
           </small>

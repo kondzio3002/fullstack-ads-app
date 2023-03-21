@@ -1,8 +1,5 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import { loadAdsRequest } from './redux/dataRedux';
 import AdBox from './components/features/Ad/Ad';
 import AddAd from './components/features/AddAd/AddAd';
 import MainLayout from './components/layout/MainLayout/MainLayout';
@@ -13,11 +10,6 @@ import Logout from './components/features/Logout/Logout';
 import NotFound from './components/pages/NotFound/NotFound';
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(loadAdsRequest())
-  }, [dispatch]);
 
   return (
     <Container>

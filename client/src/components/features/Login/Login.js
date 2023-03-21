@@ -6,11 +6,12 @@ import { Alert } from "react-bootstrap";
 import Loader from "../../common/Loader/Loader";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../../redux/dataRedux";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -33,6 +34,7 @@ const Login = () => {
         if (res.status === 200) {
           setStatus('success');
           dispatch(logIn({ login }));
+          navigate('/');
         } else if (res.status === 400) {
           setStatus('clientError');
         } else {
@@ -44,7 +46,6 @@ const Login = () => {
       });
   };
 
-  if (status === 'success') return <Navigate to='/' />
   return (
     <Form className='col-12 col-sm-3 mx-auto' onSubmit={handleSubmit}>
 

@@ -2,38 +2,35 @@ import React from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../../config";
-import { addAd, loadAds } from "../../../redux/dataRedux";
+import { addAd, loadAds, loadAdsRequest } from "../../../redux/dataRedux";
 import AdForm from "../../common/AdForm/AdForm";
 
 const AddAd = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const actionText = 'Add';
 
-  const handleSubmit = (ad) => {
-    const data = new FormData();
-    data.append('title', ad.title);
-    data.append('content', ad.content);
-    data.append('price', ad.price);
-    data.append('location', ad.location);
-    data.append('data', ad.data);
-    data.append('image', ad.image);
+  const handleSubmit = e => {
+
+    const fd = new FormData();
+    fd.append('title', e.title);
+    fd.append('content', e.content);
+    fd.append('price', e.price);
+    fd.append('location', e.location);
+    fd.append('photo', e.photo);
 
     const options = {
       method: 'POST',
-      body: data,
+      body: fd,
       credentials: 'include',
     };
-    fetch(API_URL + '/ads', options).then(res => {
-      if (res.status === 200) {
-        dispatch(addAd(ad));
-        dispatch(loadAds());
-        navigate('/');
-      }
+    fetch(`${API_URL}/ads`, options).then(res => {
+      dispatch(loadAdsRequest());
     });
   };
 
   return (
-    <AdForm action={handleSubmit} actionText='Add' />
+    <AdForm action={handleSubmit} actionText={actionText} />
   )
 };
 
