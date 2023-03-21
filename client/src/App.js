@@ -10,6 +10,7 @@ import Home from './components/pages/Home/Home';
 import Register from './components/features/Register/Register';
 import Login from './components/features/Login/Login';
 import Logout from './components/features/Logout/Logout';
+import NotFound from './components/pages/NotFound/NotFound';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const App = () => {
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/logout' element={<Logout />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </MainLayout>
     </Container>
