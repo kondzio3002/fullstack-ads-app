@@ -24,9 +24,13 @@ const AddAd = () => {
       body: fd,
       credentials: 'include',
     };
-    fetch(`${API_URL}/ads`, options).then(res => {
-      dispatch(loadAdsRequest());
-    });
+    fetch(`${API_URL}/ads`, options)
+      .then(res => {
+        dispatch(loadAdsRequest());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

@@ -7,7 +7,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadAdsRequest())
+    dispatch(loadAdsRequest());
   }, [dispatch]);
 
   return (

@@ -13,6 +13,7 @@ const Logout = () => {
     const options = {
       method: 'DELETE',
       credentials: 'include',
+      headers: { 'Cookie': document.cookie }
     };
 
     fetch(`${API_URL}/auth/logout`, options)
