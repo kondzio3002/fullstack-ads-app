@@ -23,7 +23,7 @@ exports.register = async (req, res) => {
       }
 
       const user = await User.create({ login, password: await bcrypt.hash(password, 10), avatar: avatar.filename, phone });
-      res.status(200).send({ message: 'User created ' + user.login });
+      res.status(201).send({ message: 'User created ' + user.login });
 
     } else {
       fs.unlinkSync(`./public/uploads/${avatar.filename}`);

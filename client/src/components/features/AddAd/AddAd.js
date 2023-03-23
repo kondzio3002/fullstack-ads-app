@@ -1,23 +1,24 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../../config";
-import { addAd, loadAds, loadAdsRequest } from "../../../redux/dataRedux";
+import { addAd, loadAdsRequest } from "../../../redux/dataRedux";
 import AdForm from "../../common/AdForm/AdForm";
 
 const AddAd = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const actionText = 'Add';
 
-  const handleSubmit = e => {
+  const handleSubmit = ad => {
+    dispatch(addAd);
 
     const fd = new FormData();
-    fd.append('title', e.title);
-    fd.append('content', e.content);
-    fd.append('price', e.price);
-    fd.append('location', e.location);
-    fd.append('photo', e.photo);
+    fd.append('title', ad.title);
+    fd.append('content', ad.content);
+    fd.append('price', ad.price);
+    fd.append('location', ad.location);
+    fd.append('photo', ad.photo);
+    fd.append('date', ad.date)
 
     const options = {
       method: 'POST',

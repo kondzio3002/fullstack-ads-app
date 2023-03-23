@@ -3,24 +3,33 @@ import { useForm } from "react-hook-form";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getUser } from "../../../redux/dataRedux";
 
 const AdForm = ({ action, actionText, ...props }) => {
+
+  const navigate = useNavigate();
+  const user = useSelector(getUser);
+
   const id = props.id;
   const [title, setTitle] = useState(props.title || '');
   const [content, setContent] = useState(props.content || '');
   const [photo, setPhoto] = useState(props.photo || null);
   const [price, setPrice] = useState(props.price || '');
   const [location, setLocation] = useState(props.location || '');
+  const [date, setDate] = useState(props.date || '')
 
-  const dateNow = new Date(Date.now());
-  const date = dateNow.toLocaleDateString();
+  const today = new Date();
+  const day = today.getDate().toString().padStart(2, '0');
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const year = today.getFullYear().toString();
 
-  const navigate = useNavigate();
+  const dateString = `${day}.${month}.${year}`;
 
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
 
   const handleSubmit = () => {
-    action({ title, content, photo, price, location, date, id });
+    action({ title, content, photo, price, location, date: dateString, id, user: user.login });
     navigate('/');
   };
 
