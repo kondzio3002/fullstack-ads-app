@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import { IMG_URL } from "../../../config";
 import { getAdById } from "../../../redux/dataRedux";
-import { Col, Row } from "reactstrap";
+import { Button, Col, Row } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 
@@ -16,10 +16,18 @@ const Ad = () => {
   else return (
     <div className={styles.adBox}>
       <Row>
-        <h2 className='mt-4'>{ad.title}</h2>
+
+        <div className={`mt-4 ${styles.adButtons}`}>
+          <Button color='secondary' className='mx-3'>Edit</Button>
+          <Button color='danger'>Delete</Button>
+        </div>
+
+        <h2 className='mt-3'>{ad.title}</h2>
+
         <Col>
           <img src={IMG_URL + ad.photo} className={styles.adPhoto} alt='product' />
         </Col>
+
         <Col>
           <Row>
             <Col className='mt-5'>
@@ -35,7 +43,9 @@ const Ad = () => {
             </Col>
           </Row>
         </Col>
+
         <p className='mt-3'>{ad.content}</p>
+
       </Row>
     </div>
   );

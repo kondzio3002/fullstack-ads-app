@@ -1,3 +1,4 @@
+import styles from './Ads.module.scss';
 import AdBox from '../../common/AdBox/AdBox';
 import { Row, Col, Button } from 'reactstrap';
 import { useSelector } from 'react-redux';
@@ -18,13 +19,13 @@ const Ads = () => {
     </div>
   );
   else if (request.success) return (
-    <div className='mt-4'>
+    <div className={`mt-4 ${styles.ads}`}>
       <Row>
-        <Col className={'order-2 offset-10'}>
+        <Col className={styles.addAdButton}>
           { user !== null && <Link to='/ads/add'><Button color='secondary'>Add Ad</Button></Link> }
         </Col>
       </Row>
-      <Row className='justify-content-center mt-3'>
+      <Row className={`${styles.adsContainer} mt-3`}>
         {ads.map(ad => <AdBox key={ad._id} {...ad} />)}
       </Row>
     </div>

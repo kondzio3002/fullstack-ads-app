@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const AdBox = ({ title, photo, location, _id }) => {
   return (
-    <Card className={`col-3 m-2 ${styles.adContainer}`}>
+    <Card className={`col-4 m-2 ${styles.adContainer}`} style={{ width: '22.7rem' }}>
       <img src={IMG_URL + photo} alt={title} className={styles.image}/>
       <CardBody>
         <CardTitle tag='h3'>{title}</CardTitle>
