@@ -9,19 +9,21 @@ const Home = () => {
   const user = useSelector(getUser);
 
   useEffect(() => {
+    dispatch(loadAdsRequest());
     if (user) {
       const options = {
         method: 'GET'
       };
 
-      fetch(`${API_URL}/auth/user/${user}`, options)
+      fetch(`${API_URL}/auth/user/${user.login}`, options)
         .then(res => {
           if (res.status === 200) {
-            dispatch(userData(res.data));
+            return res.json().then((data) => {
+              dispatch(userData({ id: data._id }));
+            });
           }
         });
     }
-    dispatch(loadAdsRequest());
   }, []);
 
   return (

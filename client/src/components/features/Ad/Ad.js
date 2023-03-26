@@ -2,7 +2,7 @@ import styles from "./Ad.module.scss";
 import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import { IMG_URL } from "../../../config";
-import { getAdById } from "../../../redux/dataRedux";
+import { getAdById, getUser, getUserId } from "../../../redux/dataRedux";
 import { Button, Col, Row } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
@@ -11,16 +11,19 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons';
 const Ad = () => {
   const { id } = useParams();
   const ad = useSelector(state => getAdById(state, id));
+  const user = useSelector(getUserId);
 
   if(!ad) return <Navigate to='/' />
   else return (
     <div className={styles.adBox}>
       <Row>
-
-        <div className={`mt-4 ${styles.adButtons}`}>
-          <Button color='secondary' className='mx-3'>Edit</Button>
-          <Button color='danger'>Delete</Button>
-        </div>
+      
+        { user.id === ad.user._id &&
+          <div className={`mt-4 ${styles.adButtons}`}>
+            <Button color='secondary' className='mx-3'>Edit</Button>
+            <Button color='danger'>Delete</Button>
+          </div>
+        }
 
         <h2 className='mt-3'>{ad.title}</h2>
 

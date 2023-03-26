@@ -15,7 +15,7 @@ const NavBar = () => {
           <Nav.Link as={NavLink} to='/'><Button color='secondary'>Home</Button></Nav.Link>
           { user === null && <Nav.Link as={NavLink} to='/register'><Button color='warning'>Sign up</Button></Nav.Link> }
           { user === null && <Nav.Link as={NavLink} to='/login'><Button color='success'>Sign in</Button></Nav.Link> }
-          { user !== null && <Nav.Link as={NavLink} to='/logout'><Button color='danger'>Sign out</Button></Nav.Link> }
+          { user !== null && <Nav.Link as={NavLink} to='/logout'><Button color='warning'>Sign out</Button></Nav.Link> }
         </Nav>
       </Navbar.Collapse>
     </Navbar>

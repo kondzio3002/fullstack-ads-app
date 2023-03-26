@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Collapse, Form, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getUser } from "../../../redux/dataRedux";
-import { Navigate } from 'react-router';
 
 const AdForm = ({ action, actionText, ...props }) => {
 
@@ -34,7 +33,7 @@ const AdForm = ({ action, actionText, ...props }) => {
   };
 
   return (
-    <Form className='col-10 justify-content-center' onSubmit={validate(handleSubmit)}>
+    <Form as={Col} md={{ span: 10, offset: 1 }} className='col-10' onSubmit={validate(handleSubmit)}>
 
       <h1 className='my-4'>{actionText} Ad</h1>
 
