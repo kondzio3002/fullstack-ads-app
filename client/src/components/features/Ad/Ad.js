@@ -2,7 +2,7 @@ import styles from "./Ad.module.scss";
 import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import { IMG_URL } from "../../../config";
-import { getAdById, getUser, getUserId } from "../../../redux/dataRedux";
+import { getAdById, getUserId } from "../../../redux/dataRedux";
 import { Button, Col, Row } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,7 @@ const Ad = () => {
   else return (
     <div className={styles.adBox}>
       <Row>
-      
+
         { user.id === ad.user._id &&
           <div className={`mt-4 ${styles.adButtons}`}>
             <Button color='secondary' className='mx-3'>Edit</Button>
