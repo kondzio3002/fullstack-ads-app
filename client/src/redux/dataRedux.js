@@ -8,6 +8,7 @@ export const getAdById = ({data}, id) => data.ads.find(ad => ad._id === id);
 export const getRequest = ({ data }) => data.request;
 
 export const getUser = ({ data }) => data.user;
+export const getUserId = ({ data }) => data.userData;
 
 const createActionName = name => `app/data/${name}`;
 
@@ -21,6 +22,8 @@ const ADD_AD = createActionName('ADD_AD');
 const LOG_IN = createActionName('LOG_IN');
 const LOG_OUT = createActionName('LOG_OUT');
 
+const USER_DATA = createActionName('USER_DATA');
+
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
 export const errorRequest = error => ({ error, type: ERROR_REQUEST });
@@ -30,6 +33,8 @@ export const addAd = payload => ({ payload, type: ADD_AD });
 
 export const logIn = payload => ({ payload, type: LOG_IN });
 export const logOut = () => ({ type: LOG_OUT });
+
+export const userData = payload => ({ payload, type: USER_DATA });
 
 export const loadAdsRequest = () => {
   return async dispatch => {
@@ -51,7 +56,8 @@ const initialState = {
     error: null,
     success: null,
   },
-  user: null
+  user: null,
+  userData: null
 };
 
 const dataReducer = (statePart = initialState, action = {}) => {
@@ -70,6 +76,8 @@ const dataReducer = (statePart = initialState, action = {}) => {
       return { ...statePart, user: { ...action.payload }};
     case LOG_OUT:
       return { ...statePart, user: null };
+    case USER_DATA:
+      return { ...statePart, userData: { ...action.payload } };
     default:
       return statePart;
   }

@@ -1,7 +1,7 @@
 import AdBox from '../../common/AdBox/AdBox';
 import { Row, Col, Button } from 'reactstrap';
 import { useSelector } from 'react-redux';
-import { getAds, getRequest } from '../../../redux/dataRedux';
+import { getAds, getRequest, getUser } from '../../../redux/dataRedux';
 
 import Loader from '../../common/Loader/Loader';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 const Ads = () => {
   const ads = useSelector(getAds);
   const request = useSelector(getRequest);
+  const user = useSelector(getUser);
 
   if (request.pending) return <Loader />
   else if (request.error) return (
@@ -20,7 +21,7 @@ const Ads = () => {
     <div className='mt-4'>
       <Row>
         <Col className={'order-2 offset-10'}>
-          <Link to='/ads/add'><Button color='secondary'>Add Ad</Button></Link>
+          { user !== null && <Link to='/ads/add'><Button color='secondary'>Add Ad</Button></Link> }
         </Col>
       </Row>
       <Row className='justify-content-center mt-3'>

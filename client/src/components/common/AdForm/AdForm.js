@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getUser } from "../../../redux/dataRedux";
+import { Navigate } from 'react-router';
 
 const AdForm = ({ action, actionText, ...props }) => {
 
@@ -17,7 +18,6 @@ const AdForm = ({ action, actionText, ...props }) => {
   const [photo, setPhoto] = useState(props.photo || null);
   const [price, setPrice] = useState(props.price || '');
   const [location, setLocation] = useState(props.location || '');
-  const [date, setDate] = useState(props.date || '')
 
   const today = new Date();
   const day = today.getDate().toString().padStart(2, '0');
@@ -29,14 +29,16 @@ const AdForm = ({ action, actionText, ...props }) => {
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
 
   const handleSubmit = () => {
-    action({ title, content, photo, price, location, date: dateString, id, user: user.login });
+    action({ title, content, photo, price, location, date: dateString, id, user: props.user });
     navigate('/');
   };
 
   return (
-    <Form onSubmit={validate(handleSubmit)}>
-      <h1>{actionText} Ad</h1>
-      <Form.Group>
+    <Form className='col-10 justify-content-center' onSubmit={validate(handleSubmit)}>
+
+      <h1 className='my-4'>{actionText} Ad</h1>
+
+      <Form.Group className='mb-3' controlId='formTitle'>
         <Form.Label>Title</Form.Label>
         <Form.Control
           {...register('title', { required: true, minLength: 10, maxLength: 50 })}
@@ -50,40 +52,53 @@ const AdForm = ({ action, actionText, ...props }) => {
           </small>
         }
       </Form.Group>
-      <Form.Group>
-        <Form.Label>Location</Form.Label>
-        <Form.Control
-          {...register('location', { required: true })}
-          type='text'
-          value={location}
-          onChange={e => setLocation(e.target.value)}
-        />
-        {errors.location &&
-          <small className='d-block form-text text-danger mt-2'>
-            This field is required
-          </small>
-        }
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Price</Form.Label>
-        <Form.Control
-          {...register('price', { required: true })}
-          type='number'
-          value={price}
-          onChange={e => setPrice(e.target.value)}
-        />
-        {errors.price &&
-          <small className='d-block form-text text-danger mt-2'>
-            This field is required and accept only numbers
-          </small>
-        }
-      </Form.Group>
-      <Form.Group>
+
+      <Row>
+        <Form.Group as={Col} className='mb-3' controlId='formLocation'>
+          <Form.Label>Location</Form.Label>
+          <Form.Control
+            {...register('location', { required: true })}
+            type='text'
+            value={location}
+            onChange={e => setLocation(e.target.value)}
+          />
+          {errors.location &&
+            <small className='d-block form-text text-danger mt-2'>
+              This field is required
+            </small>
+          }
+        </Form.Group>
+
+        <Form.Group as={Col} xs={{ span: 3 }} className='mb-3' controlId='formPrice'>
+          <Form.Label>Price</Form.Label>
+          <Form.Control
+            {...register('price', { required: true })}
+            type='number'
+            value={price}
+            onChange={e => setPrice(e.target.value)}
+          />
+          {errors.price &&
+            <small className='d-block form-text text-danger mt-2'>
+              This field is required and accept only numbers
+            </small>
+          }
+        </Form.Group>
+
+        <Form.Group as={Col} xs={{ span: 4 }} className='mb-3' controlId='formPhoto'>
+          <Form.Label>Add photo</Form.Label>
+          <Form.Control
+            type='file'
+            onChange={e => setPhoto(e.target.files[0])}
+          />
+        </Form.Group>
+      </Row>
+
+      <Form.Group className='mb-3' controlId='formContent'>
         <Form.Label>Content</Form.Label>
         <Form.Control
           {...register('content', { required: true, minLength: 20, maxLength: 1000})}
           as='textarea'
-          rows='8'
+          rows='5'
           type='text'
           value={content}
           onChange={e => setContent(e.target.value)}
@@ -94,15 +109,11 @@ const AdForm = ({ action, actionText, ...props }) => {
           </small>
         }
       </Form.Group>
-      <Form.Group>
-        <Form.Label>Add photo</Form.Label>
-        <Form.Control
-          type='file'
-          onChange={e => setPhoto(e.target.files[0])}
-        />
-      </Form.Group>
+
       <Button type='submit' as='input' value='Submit' className='mt-3' variant='secondary'></Button>
+
     </Form>
+
   );
 };
 

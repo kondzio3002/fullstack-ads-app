@@ -1,16 +1,16 @@
 import React from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from "../../../config";
-import { addAd, loadAdsRequest } from "../../../redux/dataRedux";
+import { addAd, getUser, loadAdsRequest } from "../../../redux/dataRedux";
 import AdForm from "../../common/AdForm/AdForm";
 
 const AddAd = () => {
   const dispatch = useDispatch();
 
   const actionText = 'Add';
+  const user = useSelector(getUser);
 
   const handleSubmit = ad => {
-    dispatch(addAd);
 
     const fd = new FormData();
     fd.append('title', ad.title);
@@ -27,6 +27,7 @@ const AddAd = () => {
     };
     fetch(`${API_URL}/ads`, options)
       .then(res => {
+        dispatch(addAd(ad));
         dispatch(loadAdsRequest());
       })
       .catch((error) => {
