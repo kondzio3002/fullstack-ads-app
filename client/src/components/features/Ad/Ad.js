@@ -2,7 +2,7 @@ import styles from "./Ad.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { IMG_URL, API_URL } from "../../../config";
-import { getAdById, getUserId, loadAds, loadAdsRequest } from "../../../redux/dataRedux";
+import { getAdById, getUserId, loadAds } from "../../../redux/dataRedux";
 import { Button, Col, Row, Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,6 @@ import React, { useState } from "react";
 
 
 const Ad = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const ad = useSelector(state => getAdById(state, id));
@@ -26,7 +25,7 @@ const Ad = () => {
       method: 'DELETE',
       credentials: 'include',
     };
-    fetch(`${API_URL}/ads/${ad._id}`, options)
+    fetch(`${API_URL}/ads/${ad._id}`, options);
     loadAds();
 
     toggle();
