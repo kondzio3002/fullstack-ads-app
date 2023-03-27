@@ -18,6 +18,7 @@ const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 
 const LOAD_ADS = createActionName('LOAD_ADS');
 const ADD_AD = createActionName('ADD_AD');
+const SEARCH_ADS = createActionName('SEARCH_ADS');
 
 const LOG_IN = createActionName('LOG_IN');
 const LOG_OUT = createActionName('LOG_OUT');
@@ -30,6 +31,7 @@ export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 
 export const loadAds = payload => ({ payload, type: LOAD_ADS });
 export const addAd = payload => ({ payload, type: ADD_AD });
+export const searchAd = payload => ({ payload, type: SEARCH_ADS });
 
 export const logIn = payload => ({ payload, type: LOG_IN });
 export const logOut = () => ({ type: LOG_OUT });
@@ -66,6 +68,8 @@ const dataReducer = (statePart = initialState, action = {}) => {
       return { ...statePart, ads: [ ...action.payload ] };
     case ADD_AD:
       return { ...statePart, ads: { ...action.payload, _id: shortid() }};
+    case SEARCH_ADS:
+      return statePart.ads.filter(ad => ad.title.includes(action.payload));
     case START_REQUEST:
       return { ...statePart, request: { pending: true, error: null, success: false } };
     case END_REQUEST:
