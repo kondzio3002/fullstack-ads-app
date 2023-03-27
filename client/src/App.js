@@ -9,6 +9,7 @@ import Login from './components/features/Login/Login';
 import Logout from './components/features/Logout/Logout';
 import NotFound from './components/pages/NotFound/NotFound';
 import EditAd from './components/features/EditAd/EditAd';
+import Search from './components/features/Search/Search';
 
 const App = () => {
 
@@ -23,6 +24,7 @@ const App = () => {
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/logout' element={<Logout />} />
+          <Route path='/search/:searchPhrase' element={<Search />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </MainLayout>

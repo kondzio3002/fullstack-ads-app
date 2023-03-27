@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser, loadAdsRequest, userData } from "../../../redux/dataRedux";
 import Ads from "../../features/Ads/Ads";
 import { API_URL } from "../../../config";
+import SearchBar from "../../views/SearchBar/SearchBar";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const Home = () => {
 
   return (
     <div>
+      <SearchBar />
       <Ads />
     </div>
   );
