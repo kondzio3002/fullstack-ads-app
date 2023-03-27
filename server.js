@@ -5,7 +5,6 @@ const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const path = require('path');
 
-
 const app = express();
 app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running!');
@@ -46,6 +45,10 @@ app.use(session({
 
 app.use('/api', require('./routes/ads.routes'));
 app.use('/api/auth', require('./routes/auth.routes'));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found...' });
