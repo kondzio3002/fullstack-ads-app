@@ -1,6 +1,6 @@
 import styles from "./Ad.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { IMG_URL, API_URL } from "../../../config";
 import { getAdById, getUserId, loadAds } from "../../../redux/dataRedux";
 import { Button, Col, Row, Modal } from "react-bootstrap";
@@ -40,7 +40,7 @@ const Ad = () => {
 
         { user.id === ad.user._id &&
           <div className={`mt-4 ${styles.adButtons}`}>
-            <Button variant='secondary' className='mx-3'>Edit</Button>
+            <Link to={`/ads/edit/${id}`}><Button variant='secondary' className='mx-3'>Edit</Button></Link>
             <Button variant='danger' onClick={toggle}>Delete</Button>
           </div>
         }

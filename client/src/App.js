@@ -8,6 +8,7 @@ import Register from './components/features/Register/Register';
 import Login from './components/features/Login/Login';
 import Logout from './components/features/Logout/Logout';
 import NotFound from './components/pages/NotFound/NotFound';
+import EditAd from './components/features/EditAd/EditAd';
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/ads/:id' element={<AdBox />} />
           <Route path='/ads/add' element={<AddAd />} />
+          <Route path='/ads/edit/:id' element={<EditAd />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/logout' element={<Logout />} />

@@ -1,14 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { API_URL } from "../../../config";
-import { addAd, getUser, loadAdsRequest } from "../../../redux/dataRedux";
+import { addAd, loadAdsRequest } from "../../../redux/dataRedux";
 import AdForm from "../../common/AdForm/AdForm";
 
 const AddAd = () => {
   const dispatch = useDispatch();
 
   const actionText = 'Add';
-  const user = useSelector(getUser);
 
   const handleSubmit = ad => {
 
