@@ -1,5 +1,5 @@
 import styles from "./Ad.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { IMG_URL, API_URL } from "../../../config";
 import { getAdById, getUserId, loadAds } from "../../../redux/dataRedux";
@@ -11,7 +11,6 @@ import React, { useState } from "react";
 
 const Ad = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { id } = useParams();
   const ad = useSelector(state => getAdById(state, id));
   const user = useSelector(getUserId);
@@ -31,13 +30,13 @@ const Ad = () => {
         loadAds();
       });
 
-
     toggle();
     navigate('/');
   };
 
 
   if(!ad) return <Navigate to='/' />
+  if(user === null) return (<h1 className='text-center mt-5'>You must be logged...</h1>)
   else return (
     <div className={styles.adBox}>
       <Row>

@@ -22,7 +22,7 @@ const AdForm = ({ action, actionText, ...props }) => {
 
   const dateString = `${day}.${month}.${year}`;
 
-  const [date, setDate] = useState(props.date || dateString);
+  const [date] = useState(props.date || dateString);
 
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
 
