@@ -14,7 +14,7 @@ const Search = () => {
 
   const searchAds = async () => {
     setLoading(true);
-    
+
     await fetch(`${API_URL}/ads/search/${searchPhrase}`)
       .then(res => res.json())
       .then(res => {
@@ -30,8 +30,8 @@ const Search = () => {
   return (
     <div>
       <SearchBar />
-      { data.length === 0 && <NotFound /> }
       { loading && <Loader /> }
+      { !loading && data.length === 0 && <NotFound /> }
       { !loading && (
         <Row className='mt-3'>
           {data.map(ad => <AdBox key={ad._id} {...ad} />)}
