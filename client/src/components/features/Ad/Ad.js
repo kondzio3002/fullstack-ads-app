@@ -1,5 +1,5 @@
 import styles from "./Ad.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { IMG_URL, API_URL } from "../../../config";
 import { getAdById, getUserId, loadAds } from "../../../redux/dataRedux";
@@ -11,6 +11,7 @@ import React, { useState } from "react";
 
 const Ad = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id } = useParams();
   const ad = useSelector(state => getAdById(state, id));
   const user = useSelector(getUserId);
@@ -25,8 +26,11 @@ const Ad = () => {
       method: 'DELETE',
       credentials: 'include',
     };
-    fetch(`${API_URL}/ads/${ad._id}`, options);
-    loadAds();
+    fetch(`${API_URL}/ads/${ad._id}`, options)
+      .then(res => {
+        loadAds();
+      });
+
 
     toggle();
     navigate('/');

@@ -14,7 +14,12 @@ const Search = () => {
 
   const searchAds = async () => {
     setLoading(true);
-    await fetch(`${API_URL}/ads/search/${searchPhrase}`)
+
+    const options = {
+      method: 'GET',
+    };
+
+    await fetch(`${API_URL}/ads/search/${searchPhrase}`, options)
       .then(res => res.json())
       .then(res => {
         setData(res);
