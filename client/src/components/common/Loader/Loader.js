@@ -1,9 +1,8 @@
 import { Spinner } from "reactstrap";
-import styles from "./Loader.module.scss";
 
 const Loader = () => {
   return (
-    <div className={styles.loader}>
+    <div className='text-center mt-4'>
       <Spinner color='secondary'>Loading...</Spinner>
     </div>
   );
